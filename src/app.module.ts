@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { ProductInfoModule } from './modules/product-info/product-info.module';
 import { ProductItemModule } from './modules/product-item/product-item.module';
 import { EmployeeModule } from './employee/employee.module';
+import { ExpenseModule } from './expense/expense.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { EmployeeModule } from './employee/employee.module';
     ProductInfoModule,
     ProductItemModule,
     EmployeeModule,
+    ExpenseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
