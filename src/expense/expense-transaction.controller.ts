@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Body, Put, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Put, Delete, Query } from '@nestjs/common';
 import { ExpenseTransactionService } from './expense-transaction.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { ExpenseTransaction } from './schemas/expense-transaction.schema';
@@ -15,6 +15,14 @@ export class ExpenseTransactionController {
   @Get('by-expense/:expenseId')
   findByExpense(@Param('expenseId') expenseId: string): Promise<ExpenseTransaction[]> {
     return this.service.findByExpense(expenseId);
+  }
+
+  @Get('filter')
+  findByFilter(
+    @Query('expenseId') expenseId?: string,
+    @Query('employeeId') employeeId?: string,
+  ): Promise<ExpenseTransaction[]> {
+    return this.service.findByFilter({ expenseId, employeeId });
   }
 
   @Put(':id')

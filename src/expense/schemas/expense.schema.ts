@@ -9,13 +9,13 @@ export class Expense {
   title: string;
 
   @Prop({ required: true })
-  date: string;
+  date: string; // ISO format: yyyy-MM-dd
 
-  @Prop({ required: true })
-  totalAmount: number;
+  @Prop()
+  notes?: string;
 
-  @Prop({ default: 0 })
-  totalReceived: number;
+  @Prop({ default: false })
+  isFinalized?: boolean;
 }
 
 export const ExpenseSchema = SchemaFactory.createForClass(Expense);

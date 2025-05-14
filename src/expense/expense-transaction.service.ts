@@ -23,6 +23,13 @@ export class ExpenseTransactionService {
     return this.txModel.find({ expenseId }).exec();
   }
 
+  async findByFilter(filter: { expenseId?: string; employeeId?: string }): Promise<ExpenseTransaction[]> {
+  const query: any = {};
+  if (filter.expenseId) query.expenseId = new Types.ObjectId(filter.expenseId);
+  if (filter.employeeId) query.employeeId = filter.employeeId;
+  return this.txModel.find(query).exec();
+}
+
   async update(id: string, dto: Partial<CreateTransactionDto>): Promise<ExpenseTransaction> {
     const updated = await this.txModel.findByIdAndUpdate(id, dto, { new: true }).exec();
     if (!updated) throw new NotFoundException('Transaction not found');

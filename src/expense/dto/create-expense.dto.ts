@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsString, IsDateString, IsNumber, Min } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsDateString,
+  IsOptional,
+  IsBoolean,
+} from 'class-validator';
 
 export class CreateExpenseDto {
   @IsNotEmpty()
@@ -9,12 +15,11 @@ export class CreateExpenseDto {
   @IsDateString()
   date: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  @Min(0)
-  totalAmount: number;
+  @IsOptional()
+  @IsString()
+  notes?: string;
 
-  @IsNumber()
-  @Min(0)
-  totalReceived?: number;
+  @IsOptional()
+  @IsBoolean()
+  isFinalized?: boolean;
 }
