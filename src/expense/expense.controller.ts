@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Query } from '@nestjs/common';
 import { ExpenseService } from './expense.service';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
@@ -18,13 +18,24 @@ export class ExpenseController {
     return this.service.findAll();
   }
 
+  @Get('range')
+  getByDateRange(
+    @Query('startDate') startDate: string,
+    @Query('endDate') endDate: string,
+  ): Promise<Expense[]> {
+    return this.service.findByDateRange(startDate, endDate);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Expense> {
     return this.service.findOne(id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateExpenseDto): Promise<Expense> {
+  update(
+    @Param('id') id: string,
+    @Body() dto: UpdateExpenseDto,
+  ): Promise<Expense> {
     return this.service.update(id, dto);
   }
 

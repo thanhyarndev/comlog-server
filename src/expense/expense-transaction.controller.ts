@@ -13,7 +13,9 @@ export class ExpenseTransactionController {
   }
 
   @Get('by-expense/:expenseId')
-  findByExpense(@Param('expenseId') expenseId: string): Promise<ExpenseTransaction[]> {
+  findByExpense(
+    @Param('expenseId') expenseId: string,
+  ): Promise<ExpenseTransaction[]> {
     return this.service.findByExpense(expenseId);
   }
 
@@ -25,8 +27,18 @@ export class ExpenseTransactionController {
     return this.service.findByFilter({ expenseId, employeeId });
   }
 
+  @Get()
+  findByMultipleExpenseIds(
+    @Query('expenseIds') expenseIds?: string[],
+  ): Promise<ExpenseTransaction[]> {
+    return this.service.findByExpenseIds(expenseIds);
+  }
+
   @Put(':id')
-  update(@Param('id') id: string, @Body() dto: CreateTransactionDto): Promise<ExpenseTransaction> {
+  update(
+    @Param('id') id: string,
+    @Body() dto: CreateTransactionDto,
+  ): Promise<ExpenseTransaction> {
     return this.service.update(id, dto);
   }
 

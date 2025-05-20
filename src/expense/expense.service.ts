@@ -28,7 +28,9 @@ export class ExpenseService {
   }
 
   async update(id: string, dto: UpdateExpenseDto): Promise<Expense> {
-    const updated = await this.expenseModel.findByIdAndUpdate(id, dto, { new: true }).exec();
+    const updated = await this.expenseModel
+      .findByIdAndUpdate(id, dto, { new: true })
+      .exec();
     if (!updated) throw new NotFoundException('Expense not found');
     return updated;
   }
@@ -36,5 +38,18 @@ export class ExpenseService {
   async remove(id: string): Promise<void> {
     const deleted = await this.expenseModel.findByIdAndDelete(id).exec();
     if (!deleted) throw new NotFoundException('Expense not found');
+  }
+
+  async findByDateRange(
+    startDate: string,
+    endDate: string,
+  ): Promise<Expense[]> {
+    const query = {
+      date: {
+        $gte: startDate,
+        $lte: endDate,
+      },
+    };
+    return this.expenseModel.find(query).exec();
   }
 }
