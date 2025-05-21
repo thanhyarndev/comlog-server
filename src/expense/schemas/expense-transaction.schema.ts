@@ -23,6 +23,9 @@ export class ExpenseTransaction {
 
   @Prop({ default: 'unpaid', enum: ['unpaid', 'partial', 'paid'] })
   status: 'unpaid' | 'partial' | 'paid';
+
+  @Prop({ type: [String], default: [] })
+  tagIds: string[];
 }
 
 export const ExpenseTransactionSchema = SchemaFactory.createForClass(ExpenseTransaction);

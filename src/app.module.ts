@@ -8,6 +8,9 @@ import { ProductInfoModule } from './modules/product-info/product-info.module';
 import { ProductItemModule } from './modules/product-item/product-item.module';
 import { EmployeeModule } from './employee/employee.module';
 import { ExpenseModule } from './expense/expense.module';
+import { TagModule } from './tag/tag.module';
+import { FoodItemModule } from './food-item/food-item.module';
+import { SessionModule } from './session/session.module';
 
 @Module({
   imports: [
@@ -26,6 +29,9 @@ import { ExpenseModule } from './expense/expense.module';
     ProductItemModule,
     EmployeeModule,
     ExpenseModule,
+    TagModule,
+    FoodItemModule,
+    SessionModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -9,13 +9,21 @@ export class Expense {
   title: string;
 
   @Prop({ required: true })
-  date: string; // ISO format: yyyy-MM-dd
+  date: string; // ISO format
 
   @Prop()
   notes?: string;
 
   @Prop({ default: false })
   isFinalized?: boolean;
+
+  // ✅ thêm để phân biệt tạo theo session hay thủ công
+  @Prop({ default: false })
+  isSessionBased?: boolean;
+
+  // ✅ ID của session nếu có
+  @Prop({ type: String, default: null })
+  sessionId?: string;
 }
 
 export const ExpenseSchema = SchemaFactory.createForClass(Expense);
