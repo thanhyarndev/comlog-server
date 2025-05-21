@@ -15,7 +15,7 @@ export class ExpenseService {
   async create(dto: CreateExpenseDto): Promise<Expense> {
     const created = new this.expenseModel(dto);
     return created.save();
-  }
+  }z
 
   async findAll(): Promise<Expense[]> {
     return this.expenseModel.find().exec();

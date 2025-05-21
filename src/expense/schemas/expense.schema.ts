@@ -24,6 +24,9 @@ export class Expense {
   // ✅ ID của session nếu có
   @Prop({ type: String, default: null })
   sessionId?: string;
+
+  @Prop({ type: [String], default: [] })
+  tagIds: string[];
 }
 
 export const ExpenseSchema = SchemaFactory.createForClass(Expense);

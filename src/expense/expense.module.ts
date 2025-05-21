@@ -16,5 +16,8 @@ import { ExpenseTransactionController } from './expense-transaction.controller';
   ],
   controllers: [ExpenseController, ExpenseTransactionController],
   providers: [ExpenseService, ExpenseTransactionService],
+  exports: [
+    MongooseModule, 
+  ],
 })
 export class ExpenseModule {}
