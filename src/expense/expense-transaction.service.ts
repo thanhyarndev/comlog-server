@@ -1,6 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ExpenseTransaction, ExpenseTransactionDocument } from './schemas/expense-transaction.schema';
+import {
+  ExpenseTransaction,
+  ExpenseTransactionDocument,
+} from './schemas/expense-transaction.schema';
 import { Model, Types } from 'mongoose';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 
@@ -31,7 +34,8 @@ export class ExpenseTransactionService {
     if (filter.expenseId)
       query.expenseId = new Types.ObjectId(filter.expenseId);
     if (filter.employeeId) query.employeeId = filter.employeeId;
-    return this.txModel.find(query).exec();
+
+    return this.txModel.find(query).populate('expenseId').exec();
   }
 
   async update(

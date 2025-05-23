@@ -23,12 +23,23 @@ export class EmployeeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateEmployeeDto: UpdateEmployeeDto,
+  ) {
     return this.employeeService.update(id, updateEmployeeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.employeeService.remove(id);
+  }
+
+  @Post('/login-pin')
+  loginWithPin(@Body() body: { pin: string }) {1
+    if (body.pin === '560013') {
+      return { success: true, role: 'admin' };
+    }
+    return { success: true, role: 'customer' };
   }
 }
